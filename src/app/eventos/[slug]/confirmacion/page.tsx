@@ -17,7 +17,7 @@ export default async function ConfirmationPage({ params }: PageProps) {
   const prizes = await getActivePrizesByEvent(event.id)
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 pt-24">
       <div className="max-w-md w-full text-center">
         {/* Success icon */}
         <div className="w-20 h-20 rounded-full bg-success-50 flex items-center justify-center mx-auto mb-6">

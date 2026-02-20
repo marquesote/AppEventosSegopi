@@ -51,7 +51,7 @@ export default async function RegistrationPage({ params }: PageProps) {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="gradient-primary py-12">
+      <div className="gradient-primary pt-24 pb-12">
         <div className="max-w-2xl mx-auto px-4 text-center">
           <Link href={`/eventos/${slug}`} className="text-white/70 hover:text-white text-sm mb-4 inline-flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
