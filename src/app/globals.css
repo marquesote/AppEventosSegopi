@@ -1,0 +1,299 @@
+/* Google Fonts - Inter + DM Sans */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   DESIGN SYSTEM: EVENTOS SEGOPI
+   Color corporativo: Magenta #E6007E
+   Headings: DM Sans | Body: Inter
+   ============================================ */
+
+:root {
+  /* Magenta primary */
+  --color-primary: #E6007E;
+  --color-primary-50: #FFF0F7;
+  --color-primary-100: #FFE0EF;
+  --color-primary-200: #FFC2DF;
+  --color-primary-300: #FF8DBF;
+  --color-primary-400: #FF4D9A;
+  --color-primary-500: #E6007E;
+  --color-primary-600: #CC006F;
+  --color-primary-700: #A3005A;
+  --color-primary-800: #800047;
+  --color-primary-900: #5C0033;
+
+  /* Magenta accent */
+  --color-accent: #E6007E;
+  --color-accent-50: #FFF0F7;
+  --color-accent-100: #FFE0EF;
+  --color-accent-200: #FFC2DF;
+  --color-accent-300: #FF8DBF;
+  --color-accent-400: #FF4D9A;
+  --color-accent-500: #E6007E;
+  --color-accent-600: #CC006F;
+  --color-accent-700: #A3005A;
+
+  /* Estados */
+  --color-success: #10B981;
+  --color-success-light: #D1FAE5;
+  --color-warning: #F59E0B;
+  --color-warning-light: #FEF3C7;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
+  --color-info: #3B82F6;
+  --color-info-light: #DBEAFE;
+
+  /* Estados de inscripcion */
+  --color-registered: #3B82F6;
+  --color-confirmed: #8B5CF6;
+  --color-attended: #10B981;
+  --color-no-show: #F59E0B;
+  --color-cancelled: #EF4444;
+
+  /* Superficies */
+  --color-background: #FAFBFC;
+  --color-surface: #FFFFFF;
+  --color-surface-elevated: #FFFFFF;
+  --color-foreground: #000000;
+  --color-foreground-secondary: #4A4A4A;
+  --color-foreground-muted: #8A8A8A;
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glass: 0 8px 32px 0 rgba(230, 0, 126, 0.1);
+
+  /* Gradient Mesh */
+  --gradient-primary: linear-gradient(135deg, #E6007E 0%, #FF4D9A 50%, #CC006F 100%);
+  --gradient-mesh-1: radial-gradient(at 40% 20%, hsla(330, 100%, 45%, 0.3) 0px, transparent 50%);
+  --gradient-mesh-2: radial-gradient(at 80% 0%, hsla(330, 80%, 65%, 0.2) 0px, transparent 50%);
+  --gradient-mesh-3: radial-gradient(at 0% 50%, hsla(340, 85%, 55%, 0.15) 0px, transparent 50%);
+}
+
+html {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: #E6007E;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+h1, h2, h3, h4, h5, h6, .heading {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+@layer base {
+  .status-registered { color: var(--color-registered); }
+  .status-confirmed { color: var(--color-confirmed); }
+  .status-attended { color: var(--color-attended); }
+  .status-no-show { color: var(--color-no-show); }
+  .status-cancelled { color: var(--color-cancelled); }
+}
+
+@layer components {
+  /* Card con efecto glass */
+  .card-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: var(--shadow-glass);
+    border-radius: 16px;
+  }
+
+  .card-elevated {
+    background: var(--color-surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border-light);
+  }
+
+  /* Badges de estado inscripcion */
+  .badge-registered {
+    background-color: var(--color-info-light);
+    color: #1D4ED8;
+  }
+  .badge-confirmed {
+    background-color: #EDE9FE;
+    color: #6D28D9;
+  }
+  .badge-attended {
+    background-color: var(--color-success-light);
+    color: #047857;
+  }
+  .badge-no-show {
+    background-color: var(--color-warning-light);
+    color: #B45309;
+  }
+  .badge-cancelled {
+    background-color: var(--color-error-light);
+    color: #B91C1C;
+  }
+
+  /* Sidebar navigation */
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .nav-item.active {
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 3px solid #ffffff;
+  }
+
+  /* Stat card */
+  .stat-card {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid var(--color-border-light);
+    transition: all 0.2s ease;
+  }
+  .stat-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+  }
+
+  /* Gradient mesh background */
+  .gradient-mesh-bg {
+    position: relative;
+    overflow: hidden;
+  }
+  .gradient-mesh-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      var(--gradient-mesh-1),
+      var(--gradient-mesh-2),
+      var(--gradient-mesh-3);
+    z-index: 0;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .glass-dark {
+    background: rgba(92, 0, 51, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-mesh {
+    background:
+      var(--gradient-mesh-1),
+      var(--gradient-mesh-2),
+      var(--gradient-mesh-3);
+  }
+
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Animaciones */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes countdown {
+    from { transform: scale(1.2); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+  }
+  @keyframes slideInRight {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+  }
+}
