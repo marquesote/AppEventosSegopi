@@ -7,8 +7,8 @@ WORKDIR /app
 
 COPY package.json package-lock.json* ./
 RUN \
-  if [ -f package-lock.json ]; then npm ci --omit=dev; \
-  else npm install --omit=dev; \
+  if [ -f package-lock.json ]; then npm ci; \
+  else npm install; \
   fi
 
 # Rebuild the source code only when needed
@@ -18,6 +18,15 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# NEXT_PUBLIC_* variables must be available at build time
+# (they get inlined into the client-side JavaScript bundle)
+ARG NEXT_PUBLIC_SUPABASE_URL=https://miymyomckhazcrdvgfqa.supabase.co
+ARG NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_uhmBGmo4mbl7_D83mvm2uw__iPIl10x
+ARG NEXT_PUBLIC_SITE_URL=https://appeventossegopi.wellgoo.es
+ENV NEXT_PUBLIC_SUPABASE_URL=$NEXT_PUBLIC_SUPABASE_URL
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=$NEXT_PUBLIC_SUPABASE_ANON_KEY
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 
 RUN npm run build
 
