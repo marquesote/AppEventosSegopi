@@ -13,6 +13,7 @@ export const registrationSchema = z.object({
     message: 'Debe aceptar la Politica de Privacidad para registrarse',
   }),
   commercialAccepted: z.boolean(),
+  raffleAccepted: z.boolean().optional().default(false),
   turnstileToken: z.string().min(1, 'Verificacion de seguridad requerida'),
 })
 

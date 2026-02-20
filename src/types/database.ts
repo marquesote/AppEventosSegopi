@@ -249,6 +249,35 @@ export interface RaffleEntry {
 }
 
 // ============================================
+// Premios por Evento
+// ============================================
+
+export interface EventPrize {
+  id: string
+  event_id: string
+  name: string
+  description: string | null
+  image_url: string | null
+  estimated_value: number | null
+  sort_order: number
+  is_active: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface CreateEventPrizeDTO {
+  event_id: string
+  name: string
+  description?: string
+  image_url?: string
+  estimated_value?: number
+  sort_order?: number
+  is_active?: boolean
+}
+
+export interface UpdateEventPrizeDTO extends Partial<Omit<CreateEventPrizeDTO, 'event_id'>> {}
+
+// ============================================
 // Metricas
 // ============================================
 
@@ -423,6 +452,11 @@ export interface Database {
         Row: RaffleEntry
         Insert: Omit<RaffleEntry, 'id' | 'created_at' | 'is_winner' | 'winner_position'>
         Update: Partial<Pick<RaffleEntry, 'is_winner' | 'winner_position'>>
+      }
+      event_prizes: {
+        Row: EventPrize
+        Insert: CreateEventPrizeDTO
+        Update: UpdateEventPrizeDTO
       }
       event_metrics: {
         Row: EventMetric

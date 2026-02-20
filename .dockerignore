@@ -1,0 +1,44 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+.next
+.git
+.gitignore
+*.md
+LICENSE
+
+# Environment files
+.env
+.env.*
+
+# IDE
+.vscode
+.idea
+.claude
+
+# Testing
+playwright-report
+test-results
+e2e
+playwright.config.ts
+*.test.*
+*.spec.*
+
+# Screenshots and test images
+*.png
+*.jpg
+!public/**
+
+# OS
+.DS_Store
+Thumbs.db
+bash.exe.stackdump
+
+# Playwright MCP
+.playwright-mcp
+
+# Misc
+plan.md
+components.json
+tsconfig.tsbuildinfo

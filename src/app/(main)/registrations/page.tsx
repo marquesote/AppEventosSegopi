@@ -33,9 +33,9 @@ export default async function RegistrationsPage({ searchParams }: PageProps) {
   })
 
   return (
-    <div className="p-8">
+    <div className="p-4 sm:p-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h1 className="text-display-sm">Inscripciones</h1>
           <p className="text-foreground-secondary mt-1">
@@ -89,7 +89,7 @@ export default async function RegistrationsPage({ searchParams }: PageProps) {
       </div>
 
       {/* Table */}
-      <div className="card-elevated overflow-hidden">
+      <div className="card-elevated overflow-hidden overflow-x-auto">
         {registrations.length === 0 ? (
           <div className="p-12 text-center text-foreground-secondary">
             <svg className="w-12 h-12 mx-auto mb-4 text-foreground-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@ export default async function RegistrationsPage({ searchParams }: PageProps) {
             <p className="text-sm mt-1">No se encontraron inscripciones con los filtros actuales</p>
           </div>
         ) : (
-          <table className="w-full">
+          <table className="w-full min-w-[500px]">
             <thead className="bg-background border-b border-border">
               <tr>
                 <th className="text-left px-6 py-3 text-xs font-semibold text-foreground-secondary uppercase tracking-wider">Asistente</th>

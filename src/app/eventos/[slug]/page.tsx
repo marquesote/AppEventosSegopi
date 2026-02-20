@@ -7,6 +7,8 @@ import { BenefitsSection } from '@/features/events/components/BenefitsSection'
 import { SpeakersSection } from '@/features/events/components/SpeakersSection'
 import { GallerySection } from '@/features/events/components/GallerySection'
 import { MapEmbed } from '@/features/events/components/MapEmbed'
+import { PrizesSection } from '@/features/events/components/PrizesSection'
+import { getActivePrizesByEvent } from '@/features/raffles/services/prizeService'
 import { siteConfig } from '@/config/siteConfig'
 
 interface PageProps {
@@ -53,13 +55,15 @@ export default async function EventLandingPage({ params }: PageProps) {
   const isRegistrationOpen = event.status === 'published' &&
     (!event.registration_deadline || new Date(event.registration_deadline) > new Date())
 
+  const prizes = await getActivePrizesByEvent(event.id)
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative gradient-primary py-20 sm:py-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-mesh opacity-30" />
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-20 left-10 w-[300px] h-[300px] bg-primary-300/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-[250px] h-[250px] sm:w-[500px] sm:h-[500px] bg-accent-500/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] bg-primary-300/20 rounded-full blur-3xl" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <p className="text-accent-300 font-medium mb-4 uppercase tracking-wider text-sm">
@@ -146,6 +150,9 @@ export default async function EventLandingPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      {/* Prizes / Sorteos */}
+      <PrizesSection prizes={prizes} />
 
       {/* Benefits */}
       <BenefitsSection benefits={event.benefits} />

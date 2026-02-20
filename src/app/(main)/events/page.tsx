@@ -6,8 +6,8 @@ export default async function EventsPage() {
   const events = await getAllEvents()
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-display-sm">Eventos</h1>
           <p className="text-foreground-secondary mt-1">Gestiona tus ferias y eventos</p>
@@ -40,31 +40,31 @@ export default async function EventsPage() {
           </Link>
         </div>
       ) : (
-        <div className="card-elevated overflow-hidden">
-          <table className="w-full">
+        <div className="card-elevated overflow-hidden overflow-x-auto">
+          <table className="w-full min-w-[600px]">
             <thead>
               <tr className="border-b border-border-light">
-                <th className="text-left px-6 py-4 text-body-sm font-medium text-foreground-secondary">Evento</th>
-                <th className="text-left px-6 py-4 text-body-sm font-medium text-foreground-secondary">Fecha</th>
-                <th className="text-left px-6 py-4 text-body-sm font-medium text-foreground-secondary">Ciudad</th>
-                <th className="text-left px-6 py-4 text-body-sm font-medium text-foreground-secondary">Estado</th>
-                <th className="text-right px-6 py-4 text-body-sm font-medium text-foreground-secondary">Acciones</th>
+                <th className="text-left px-4 sm:px-6 py-4 text-body-sm font-medium text-foreground-secondary">Evento</th>
+                <th className="text-left px-4 sm:px-6 py-4 text-body-sm font-medium text-foreground-secondary hidden sm:table-cell">Fecha</th>
+                <th className="text-left px-4 sm:px-6 py-4 text-body-sm font-medium text-foreground-secondary hidden md:table-cell">Ciudad</th>
+                <th className="text-left px-4 sm:px-6 py-4 text-body-sm font-medium text-foreground-secondary">Estado</th>
+                <th className="text-right px-4 sm:px-6 py-4 text-body-sm font-medium text-foreground-secondary">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {events.map((event) => (
                 <tr key={event.id} className="border-b border-border-light hover:bg-primary-50/30 transition-colors">
-                  <td className="px-6 py-4">
+                  <td className="px-4 sm:px-6 py-4">
                     <Link href={`/events/${event.id}`} className="font-medium hover:text-primary-600 transition-colors">
                       {event.title}
                     </Link>
                   </td>
-                  <td className="px-6 py-4 text-foreground-secondary">
+                  <td className="px-4 sm:px-6 py-4 text-foreground-secondary hidden sm:table-cell">
                     {new Date(event.event_date).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
                   </td>
-                  <td className="px-6 py-4 text-foreground-secondary">{event.city}</td>
-                  <td className="px-6 py-4"><EventStatusBadge status={event.status} /></td>
-                  <td className="px-6 py-4 text-right">
+                  <td className="px-4 sm:px-6 py-4 text-foreground-secondary hidden md:table-cell">{event.city}</td>
+                  <td className="px-4 sm:px-6 py-4"><EventStatusBadge status={event.status} /></td>
+                  <td className="px-4 sm:px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <Link
                         href={`/events/${event.id}`}
@@ -74,7 +74,7 @@ export default async function EventsPage() {
                       </Link>
                       <Link
                         href={`/events/${event.id}/registrations`}
-                        className="text-sm text-foreground-secondary hover:text-foreground font-medium"
+                        className="text-sm text-foreground-secondary hover:text-foreground font-medium hidden sm:inline"
                       >
                         Inscripciones
                       </Link>

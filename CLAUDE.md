@@ -198,6 +198,22 @@ Ver `.claude/prompts/bucle-agentico-blueprint.md` para el proceso completo:
 
 ---
 
+## 📱 Responsive / Mobile-First (OBLIGATORIO)
+
+> **TODA feature, componente o página DEBE ser responsive.** Se desarrolla para PC y móvil simultáneamente. No se acepta código que solo funcione en desktop.
+
+### Reglas
+- **Mobile-first con Tailwind**: estilos base para móvil, `sm:` / `md:` / `lg:` para pantallas más grandes
+- **Sidebar admin**: drawer con hamburger en mobile, fija en `md:+`
+- **Layout admin**: `ml-0 md:ml-64 pt-16 md:pt-0`
+- **Tablas**: siempre `overflow-x-auto` + `min-w-[Xpx]`, ocultar columnas secundarias con `hidden sm:table-cell`
+- **Headers con botones**: `flex-col sm:flex-row` para apilar en mobile
+- **Padding de páginas**: `p-4 sm:p-8`
+- **Inputs estrechos**: ajustar width con breakpoints (ej: `w-24 sm:w-36`)
+- **Elementos decorativos**: reducir tamaño en mobile (ej: `w-[250px] sm:w-[500px]`)
+
+---
+
 ## 📏 Reglas de Código
 
 ### Principios

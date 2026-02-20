@@ -3,7 +3,6 @@
 /.pnp
 .pnp.js
 yarn.lock
-package-lock.json
 pnpm-lock.yaml
 
 # Testing
@@ -66,8 +65,12 @@ Thumbs.db
 # Playwright MCP logs
 .playwright-mcp/
 
-# Test screenshots
+# Test screenshots and temp images
 *-test.png
+responsive-*.png
+prize-*.png
+bash.exe.stackdump
+plan.md
 
 # Supabase
 supabase/.branches

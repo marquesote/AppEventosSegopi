@@ -170,9 +170,25 @@ export async function POST(request: NextRequest) {
         consent_user_agent: userAgent,
         policy_version: '1.0',
       },
+      {
+        registration_id: registration.id,
+        consent_type: 'raffle_participation',
+        granted: data.raffleAccepted ?? false,
+        consent_ip: ip,
+        consent_user_agent: userAgent,
+        policy_version: '1.0',
+      },
     ]
 
     await supabase.from('consents').insert(consents)
+
+    // Marcar como elegible para sorteos si acepto
+    if (data.raffleAccepted) {
+      await supabase
+        .from('registrations')
+        .update({ raffle_eligible: true })
+        .eq('id', registration.id)
+    }
 
     // TODO: Enviar email de verificacion (double opt-in)
     // TODO: Trigger workflow de confirmacion

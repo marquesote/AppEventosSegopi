@@ -37,6 +37,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
       eventId: event.id,
       privacyAccepted: formData.get('privacyAccepted') === 'on',
       commercialAccepted: formData.get('commercialAccepted') === 'on',
+      raffleAccepted: formData.get('raffleAccepted') === 'on',
       turnstileToken: 'dev-bypass', // TODO: Integrate real Turnstile widget
     }
 
@@ -128,7 +129,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
           <select
             name="phoneCountryCode"
             defaultValue="+34"
-            className="w-36 px-3 py-3 rounded-xl border border-border bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all text-sm"
+            className="w-24 sm:w-36 px-2 sm:px-3 py-3 rounded-xl border border-border bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all text-sm"
           >
             {phoneCountryCodes.map((c) => (
               <option key={c.code} value={c.code}>{c.flag} {c.code}</option>
@@ -201,6 +202,19 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
           />
           <span className="text-sm text-foreground-secondary">
             Acepto recibir comunicaciones comerciales y promociones de proximos eventos.
+            <span className="text-foreground-muted"> (opcional)</span>
+          </span>
+        </label>
+
+        {/* Participacion en Sorteos - OPCIONAL */}
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            name="raffleAccepted"
+            className="mt-1 w-4 h-4 rounded border-border text-primary-500 focus:ring-primary-500/20"
+          />
+          <span className="text-sm text-foreground-secondary">
+            Quiero participar en los sorteos de premios del evento.
             <span className="text-foreground-muted"> (opcional)</span>
           </span>
         </label>
