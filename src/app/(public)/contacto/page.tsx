@@ -73,13 +73,13 @@ export default function ContactoPage() {
 
           <div className="text-center py-10 bg-primary-50 rounded-2xl border border-primary-100">
             <p className="text-body-md text-foreground-secondary">
-              Para inscribirse en nuestros eventos, visita la pagina del evento correspondiente.
+              Para inscribirse en nuestros eventos, visita la página del evento correspondiente.
             </p>
             <a
               href="/#eventos"
               className="inline-flex items-center mt-4 bg-primary-500 hover:bg-primary-600 text-white font-semibold px-6 py-3 rounded-xl transition-colors"
             >
-              Ver proximos eventos
+              Ver próximos eventos
             </a>
           </div>
         </div>

@@ -40,6 +40,7 @@ export async function createEventAction(formData: FormData) {
     venue_address: formData.get('venue_address') as string,
     city: formData.get('city') as string,
     google_maps_embed_url: (formData.get('google_maps_embed_url') as string) || undefined,
+    venue_image_url: (formData.get('venue_image_url') as string) || undefined,
     max_capacity: formData.get('max_capacity') ? Number(formData.get('max_capacity')) : undefined,
   }
 
@@ -77,6 +78,7 @@ export async function updateEventAction(id: string, formData: FormData) {
     venue_address: formData.get('venue_address') as string,
     city: formData.get('city') as string,
     google_maps_embed_url: (formData.get('google_maps_embed_url') as string) || undefined,
+    venue_image_url: (formData.get('venue_image_url') as string) || undefined,
     max_capacity: formData.get('max_capacity') ? Number(formData.get('max_capacity')) : undefined,
     status: (formData.get('status') as UpdateEventDTO['status']) || undefined,
   }

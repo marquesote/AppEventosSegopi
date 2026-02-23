@@ -49,7 +49,7 @@ export default function PrivacidadPage() {
             <div>
               <h2 className="font-heading text-display-xs text-gray-900 mb-3">3. Protección de Datos</h2>
               <p>
-                Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger su información personal contra el acceso no autorizado, la alteración, divulgación o destrucción. Toda la informacion proporcionada esta protegida conforme a la normativa de proteccion de datos vigente en {siteConfig.contact.country}.
+                Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger su información personal contra el acceso no autorizado, la alteración, divulgación o destrucción. Toda la informacion proporcionada esta protegida conforme a la normativa de protección de datos vigente en {siteConfig.contact.country}.
               </p>
             </div>
 

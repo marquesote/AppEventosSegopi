@@ -222,7 +222,7 @@ function PrizeForm({ prize, eventId, isPending, onSubmit, onCancel }: PrizeFormP
         // Set the uploaded URL in formData
         formData.set('image_url', result.url)
       } catch {
-        setUploadError('Error de conexion al subir la imagen')
+        setUploadError('Error de conexión al subir la imagen')
         setUploading(false)
         return
       }

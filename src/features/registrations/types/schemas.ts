@@ -3,18 +3,18 @@ import { z } from 'zod'
 export const registrationSchema = z.object({
   firstName: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
   lastName: z.string().min(2, 'Los apellidos deben tener al menos 2 caracteres'),
-  email: z.string().email('Introduce un email valido'),
-  phone: z.string().regex(/^\d{6,14}$/, 'Introduce un telefono valido'),
-  phoneCountryCode: z.string().regex(/^\+\d{1,3}$/, 'Prefijo invalido'),
-  company: z.string().optional(),
+  email: z.string().email('Introduce un email válido'),
+  phone: z.string().regex(/^\d{6,14}$/, 'Introduce un teléfono válido'),
+  phoneCountryCode: z.string().regex(/^\+\d{1,3}$/, 'Prefijo inválido'),
+  company: z.string().min(1, 'La empresa es obligatoria'),
   position: z.string().optional(),
-  eventId: z.string().uuid('Evento invalido'),
+  eventId: z.string().uuid('Evento inválido'),
   privacyAccepted: z.literal(true, {
-    message: 'Debe aceptar la Politica de Privacidad para registrarse',
+    message: 'Debe aceptar la Política de Privacidad para registrarse',
   }),
   commercialAccepted: z.boolean(),
   raffleAccepted: z.boolean().optional().default(false),
-  turnstileToken: z.string().min(1, 'Verificacion de seguridad requerida'),
+  turnstileToken: z.string().min(1, 'Verificación de seguridad requerida'),
 })
 
 export type RegistrationFormData = z.infer<typeof registrationSchema>

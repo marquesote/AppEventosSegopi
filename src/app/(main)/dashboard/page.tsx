@@ -84,9 +84,9 @@ export default async function DashboardPage() {
 
         {/* Upcoming Events */}
         <div className="card-elevated p-6">
-          <h2 className="text-display-xs mb-4">Proximos Eventos</h2>
+          <h2 className="text-display-xs mb-4">Próximos Eventos</h2>
           {upcomingEvents.length === 0 ? (
-            <p className="text-foreground-secondary text-sm">No hay eventos proximos</p>
+            <p className="text-foreground-secondary text-sm">No hay eventos próximos</p>
           ) : (
             <div className="space-y-3">
               {upcomingEvents.map((event) => (

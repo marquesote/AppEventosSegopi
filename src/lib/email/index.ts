@@ -1,4 +1,4 @@
-export { getResend, EMAIL_CONFIG } from './resend'
+export { sendEmail, EMAIL_CONFIG } from './resend'
 export {
   registrationConfirmationEmail,
   preEventReminderEmail,
@@ -7,5 +7,6 @@ export {
   commercialFollowUpEmail,
   emailVerificationEmail,
   unsubscribeConfirmationEmail,
+  attendanceThankYouEmail,
 } from './templates'
 export type { EventEmailData } from './templates'

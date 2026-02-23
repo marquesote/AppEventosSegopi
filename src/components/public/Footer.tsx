@@ -59,7 +59,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/terminos" className="text-body-sm text-gray-400 hover:text-primary-300 transition-colors">
-                  Terminos de Servicio
+                  Términos de Servicio
                 </Link>
               </li>
               <li>
@@ -140,7 +140,7 @@ export function Footer() {
               </Link>
               <span aria-hidden="true">|</span>
               <Link href="/terminos" className="hover:text-primary-300 transition-colors">
-                Terminos
+                Términos
               </Link>
               <span aria-hidden="true">|</span>
               <Link href="/cookies" className="hover:text-primary-300 transition-colors">

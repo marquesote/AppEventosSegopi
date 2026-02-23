@@ -1,23 +1,43 @@
-import { Resend } from 'resend'
+import nodemailer from 'nodemailer'
 
-// Lazy initialize Resend client to avoid build-time errors
-let resendInstance: Resend | null = null
+// Lazy initialize SMTP transporter
+let transporterInstance: nodemailer.Transporter | null = null
 
-export function getResend(): Resend {
-  if (!resendInstance) {
-    const apiKey = process.env.RESEND_API_KEY
-    if (!apiKey) {
-      throw new Error('RESEND_API_KEY is not configured')
-    }
-    resendInstance = new Resend(apiKey)
+function getTransporter(): nodemailer.Transporter {
+  if (!transporterInstance) {
+    transporterInstance = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || 'mail.segopi.es',
+      port: Number(process.env.SMTP_PORT || 465),
+      secure: Number(process.env.SMTP_PORT || 465) === 465,
+      auth: {
+        user: process.env.SMTP_USER || 'eventos@segopi.es',
+        pass: process.env.SMTP_PASS,
+      },
+    })
   }
-  return resendInstance
+  return transporterInstance
 }
 
 // Email configuration
-// Note: Use 'onboarding@resend.dev' for testing without verified domain
-// Change to your verified domain in production
 export const EMAIL_CONFIG = {
-  from: process.env.RESEND_FROM_EMAIL || 'Eventos SEGOPI <onboarding@resend.dev>',
+  from: process.env.SMTP_FROM || 'Eventos SEGOPI <eventos@segopi.es>',
   replyTo: 'eventos@segopi.es',
+}
+
+// Unified send function
+export async function sendEmail(options: {
+  to: string | string[]
+  subject: string
+  html: string
+  replyTo?: string
+}): Promise<void> {
+  const transporter = getTransporter()
+
+  await transporter.sendMail({
+    from: EMAIL_CONFIG.from,
+    to: options.to,
+    replyTo: options.replyTo || EMAIL_CONFIG.replyTo,
+    subject: options.subject,
+    html: options.html,
+  })
 }

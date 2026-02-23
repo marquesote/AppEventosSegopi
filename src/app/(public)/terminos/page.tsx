@@ -31,14 +31,14 @@ export default function TerminosPage() {
             <div>
               <h2 className="font-heading text-display-xs text-gray-900 mb-3">2. Servicios Legales</h2>
               <p>
-                La información proporcionada en este sitio web es de carácter general e informativo. No constituye asesoramiento profesional. La relacion contractual con TELLING CONSULTING, S.L. se establece mediante la inscripcion a eventos y la aceptacion de estos terminos.
+                La información proporcionada en este sitio web es de carácter general e informativo. No constituye asesoramiento profesional. La relación contractual con TELLING CONSULTING, S.L. se establece mediante la inscripción a eventos y la aceptación de estos términos.
               </p>
             </div>
 
             <div>
               <h2 className="font-heading text-display-xs text-gray-900 mb-3">3. Consultas y Comunicaciones</h2>
               <p>
-                Las consultas realizadas a traves de nuestro formulario de contacto o por correo electronico no establecen una relacion contractual. La informacion compartida a traves de estos medios sera tratada conforme a nuestra Politica de Privacidad.
+                Las consultas realizadas a traves de nuestro formulario de contacto o por correo electronico no establecen una relación contractual. La informacion compartida a traves de estos medios sera tratada conforme a nuestra Política de Privacidad.
               </p>
             </div>
 

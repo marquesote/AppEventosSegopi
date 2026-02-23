@@ -124,7 +124,7 @@ export default async function EventLandingPage({ params }: PageProps) {
                 </svg>
               </div>
               <p className="font-heading font-semibold">{formattedDate}</p>
-              <p className="text-sm text-foreground-secondary">{event.event_start_time} - {event.event_end_time}</p>
+              <p className="text-sm text-foreground-secondary">{event.event_start_time?.slice(0, 5)} - {event.event_end_time?.slice(0, 5)}</p>
             </div>
 
             <div className="text-center">
@@ -151,9 +151,6 @@ export default async function EventLandingPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* Prizes / Sorteos */}
-      <PrizesSection prizes={prizes} />
-
       {/* Benefits */}
       <BenefitsSection benefits={event.benefits} />
 
@@ -163,13 +160,17 @@ export default async function EventLandingPage({ params }: PageProps) {
       {/* Gallery */}
       <GallerySection images={event.gallery_images} />
 
-      {/* Map */}
+      {/* Map / Ubicacion */}
       <MapEmbed
         embedUrl={event.google_maps_embed_url}
+        venueImageUrl={event.venue_image_url}
         venueName={event.venue_name}
         venueAddress={event.venue_address}
         city={event.city}
       />
+
+      {/* Prizes / Sorteos */}
+      <PrizesSection prizes={prizes} />
 
       {/* CTA final */}
       {isRegistrationOpen && (
@@ -199,7 +200,7 @@ export default async function EventLandingPage({ params }: PageProps) {
           <p>&copy; {new Date().getFullYear()} {siteConfig.companyName}. Todos los derechos reservados.</p>
           <div className="flex justify-center gap-6 mt-3">
             <Link href="/privacidad" className="hover:text-white transition-colors">Privacidad</Link>
-            <Link href="/terminos" className="hover:text-white transition-colors">Terminos</Link>
+            <Link href="/terminos" className="hover:text-white transition-colors">Términos</Link>
             <Link href="/cookies" className="hover:text-white transition-colors">Cookies</Link>
           </div>
         </div>

@@ -32,7 +32,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
       email: formData.get('email') as string,
       phone: formData.get('phone') as string,
       phoneCountryCode: formData.get('phoneCountryCode') as string,
-      company: (formData.get('company') as string) || undefined,
+      company: formData.get('company') as string,
       position: (formData.get('position') as string) || undefined,
       eventId: event.id,
       privacyAccepted: formData.get('privacyAccepted') === 'on',
@@ -59,14 +59,14 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
       const result = await response.json()
 
       if (!response.ok) {
-        setServerError(result.error || 'Error al procesar la inscripcion')
+        setServerError(result.error || 'Error al procesar la inscripción')
         setIsSubmitting(false)
         return
       }
 
       router.push(`/eventos/${event.slug}/confirmacion`)
     } catch {
-      setServerError('Error de conexion. Intenta de nuevo.')
+      setServerError('Error de conexión. Inténtalo de nuevo.')
       setIsSubmitting(false)
     }
   }
@@ -102,7 +102,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
             type="text"
             required
             className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
-            placeholder="Garcia Lopez"
+            placeholder="García López"
           />
           {fieldErrors.lastName && <p className="text-error-600 text-xs mt-1">{fieldErrors.lastName[0]}</p>}
         </div>
@@ -124,7 +124,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
 
       {/* Telefono */}
       <div>
-        <label htmlFor="phone" className="block text-sm font-medium mb-1.5">Telefono movil *</label>
+        <label htmlFor="phone" className="block text-sm font-medium mb-1.5">Teléfono móvil *</label>
         <div className="flex gap-2">
           <select
             name="phoneCountryCode"
@@ -150,14 +150,16 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
       {/* Empresa y Cargo */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="company" className="block text-sm font-medium mb-1.5">Empresa / Organizacion</label>
+          <label htmlFor="company" className="block text-sm font-medium mb-1.5">Empresa / Organización *</label>
           <input
             id="company"
             name="company"
             type="text"
+            required
             className="w-full px-4 py-3 rounded-xl border border-border bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all"
             placeholder="Mi Empresa S.L."
           />
+          {fieldErrors.company && <p className="text-error-600 text-xs mt-1">{fieldErrors.company[0]}</p>}
         </div>
 
         <div>
@@ -174,7 +176,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
 
       {/* Consentimientos RGPD */}
       <div className="space-y-4 p-5 rounded-xl bg-primary-50/50 border border-primary-100">
-        <h3 className="text-sm font-semibold text-primary-800">Proteccion de Datos</h3>
+        <h3 className="text-sm font-semibold text-primary-800">Protección de Datos</h3>
 
         {/* Politica de Privacidad - OBLIGATORIO */}
         <label className="flex items-start gap-3 cursor-pointer">
@@ -186,7 +188,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
           <span className="text-sm text-foreground-secondary">
             He leido y acepto la{' '}
             <a href="/privacidad" target="_blank" className="text-primary-600 underline hover:text-primary-700">
-              Politica de Privacidad
+              Política de Privacidad
             </a>
             {' '}* (obligatorio)
           </span>
@@ -201,7 +203,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
             className="mt-1 w-4 h-4 rounded border-border text-primary-500 focus:ring-primary-500/20"
           />
           <span className="text-sm text-foreground-secondary">
-            Acepto recibir comunicaciones comerciales y promociones de proximos eventos.
+            Acepto recibir comunicaciones comerciales y promociones de próximos eventos.
             <span className="text-foreground-muted"> (opcional)</span>
           </span>
         </label>
@@ -228,7 +230,7 @@ export function RegistrationForm({ event }: RegistrationFormProps) {
         disabled={isSubmitting}
         className="w-full py-4 bg-accent-500 hover:bg-accent-600 disabled:bg-accent-300 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-lg"
       >
-        {isSubmitting ? 'Procesando...' : 'Completar Inscripcion'}
+        {isSubmitting ? 'Procesando...' : 'Completar Inscripción'}
       </button>
 
       <p className="text-xs text-foreground-muted text-center">

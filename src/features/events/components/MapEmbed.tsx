@@ -1,23 +1,23 @@
+import Image from 'next/image'
+
 interface MapEmbedProps {
   embedUrl: string | null
+  venueImageUrl: string | null
   venueName: string
   venueAddress: string
   city: string
 }
 
 function buildMapSrc(embedUrl: string | null, venueName: string, venueAddress: string, city: string): string {
-  // If a proper Google Maps embed URL is provided, use it directly
   if (embedUrl && embedUrl.includes('google.com/maps/embed')) {
     return embedUrl
   }
 
-  // Generate a Google Maps embed URL from the address
-  // This format works in all browsers without consent/cookie issues
   const query = encodeURIComponent(`${venueName}, ${venueAddress}, ${city}`)
   return `https://maps.google.com/maps?q=${query}&t=&z=15&ie=UTF8&iwloc=&output=embed`
 }
 
-export function MapEmbed({ embedUrl, venueName, venueAddress, city }: MapEmbedProps) {
+export function MapEmbed({ embedUrl, venueImageUrl, venueName, venueAddress, city }: MapEmbedProps) {
   const mapSrc = buildMapSrc(embedUrl, venueName, venueAddress, city)
   const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${venueName}, ${venueAddress}, ${city}`)}`
 
@@ -59,16 +59,27 @@ export function MapEmbed({ embedUrl, venueName, venueAddress, city }: MapEmbedPr
 
           <div className="lg:w-2/3 w-full">
             <div className="rounded-2xl overflow-hidden shadow-elevated">
-              <iframe
-                src={mapSrc}
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title={`Mapa de ${venueName}`}
-              />
+              {venueImageUrl ? (
+                <Image
+                  src={venueImageUrl}
+                  alt={`Ubicacion: ${venueName}`}
+                  width={800}
+                  height={400}
+                  className="w-full object-cover"
+                  style={{ maxHeight: '400px' }}
+                />
+              ) : (
+                <iframe
+                  src={mapSrc}
+                  width="100%"
+                  height="400"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`Mapa de ${venueName}`}
+                />
+              )}
             </div>
           </div>
         </div>

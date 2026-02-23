@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { registrationSchema } from '@/features/registrations/types/schemas'
 import crypto from 'crypto'
+import QRCode from 'qrcode'
+import { sendEmail } from '@/lib/email'
+import { registrationConfirmationEmail } from '@/lib/email/templates'
 
 async function verifyTurnstile(token: string, ip: string): Promise<boolean> {
   const secretKey = process.env.TURNSTILE_SECRET_KEY
@@ -33,7 +36,7 @@ export async function POST(request: NextRequest) {
     const parsed = registrationSchema.safeParse(body)
     if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Datos invalidos', details: parsed.error.flatten().fieldErrors },
+        { error: 'Datos inválidos', details: parsed.error.flatten().fieldErrors },
         { status: 400 }
       )
     }
@@ -100,7 +103,7 @@ export async function POST(request: NextRequest) {
 
     if (event.registration_deadline && new Date(event.registration_deadline) < new Date()) {
       return NextResponse.json(
-        { error: 'El plazo de inscripcion ha finalizado.' },
+        { error: 'El plazo de inscripción ha finalizado.' },
         { status: 400 }
       )
     }
@@ -121,8 +124,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Generar token de verificacion de email
+    // Generar token de verificacion de email y token unico de QR para check-in
     const verificationToken = crypto.randomBytes(32).toString('hex')
+    const qrToken = crypto.randomUUID()
 
     // Crear inscripcion
     const { data: registration, error: regError } = await supabase
@@ -133,6 +137,7 @@ export async function POST(request: NextRequest) {
         last_name: data.lastName,
         email: data.email,
         email_verification_token: verificationToken,
+        qr_token: qrToken,
         phone: data.phone,
         phone_country_code: data.phoneCountryCode,
         company: data.company ?? null,
@@ -147,7 +152,7 @@ export async function POST(request: NextRequest) {
     if (regError) {
       console.error('Registration error:', regError)
       return NextResponse.json(
-        { error: 'Error al procesar la inscripcion. Intenta de nuevo.' },
+        { error: 'Error al procesar la inscripción. Inténtalo de nuevo.' },
         { status: 500 }
       )
     }
@@ -190,8 +195,52 @@ export async function POST(request: NextRequest) {
         .eq('id', registration.id)
     }
 
-    // TODO: Enviar email de verificacion (double opt-in)
-    // TODO: Trigger workflow de confirmacion
+    // Obtener detalles completos del evento para el email de confirmacion
+    const { data: eventDetails } = await supabase
+      .from('events')
+      .select('title, event_date, event_start_time, event_end_time, venue_name, venue_address, city')
+      .eq('id', data.eventId)
+      .single()
+
+    if (eventDetails) {
+      try {
+        const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+        const checkinUrl = `${siteUrl}/api/checkin?token=${qrToken}`
+        const qrDataUrl = await QRCode.toDataURL(checkinUrl, { width: 300, margin: 2 })
+
+        const eventDate = new Date(eventDetails.event_date).toLocaleDateString('es-ES', {
+          weekday: 'long',
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })
+
+        const startTime = eventDetails.event_start_time?.slice(0, 5) ?? ''
+        const endTime = eventDetails.event_end_time?.slice(0, 5) ?? ''
+        const eventTime = endTime ? `${startTime} - ${endTime}` : startTime
+
+        const emailHtml = registrationConfirmationEmail({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          eventTitle: eventDetails.title,
+          eventDate,
+          eventTime,
+          venueName: eventDetails.venue_name ?? '',
+          venueAddress: eventDetails.venue_address ?? '',
+          city: eventDetails.city ?? '',
+          qrCodeDataUrl: qrDataUrl,
+        })
+
+        await sendEmail({
+          to: registration.email,
+          subject: `Confirmacion de Inscripcion - ${eventDetails.title}`,
+          html: emailHtml,
+        })
+      } catch (emailError) {
+        console.error('Failed to send confirmation email:', emailError)
+        // No se falla el registro si el envio de email falla
+      }
+    }
 
     return NextResponse.json({
       success: true,

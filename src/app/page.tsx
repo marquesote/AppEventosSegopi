@@ -123,13 +123,13 @@ async function EventsSection() {
       <section id="eventos" className="py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            label="Proximos eventos"
+            label="Próximos eventos"
             title="Agenda de Eventos"
-            subtitle="Jornadas, congresos y formacion para profesionales de la seguridad privada."
+            subtitle="Jornadas, congresos y formación para profesionales de la seguridad privada."
           />
           <div className="mt-12 text-center py-16 bg-error-50 rounded-2xl border border-error-100">
             <p className="text-body-md text-error-600">
-              No se pudieron cargar los eventos. Por favor, intentalo de nuevo mas tarde.
+              No se pudieron cargar los eventos. Por favor, inténtalo de nuevo más tarde.
             </p>
           </div>
         </div>
@@ -143,9 +143,9 @@ async function EventsSection() {
     <section id="eventos" className="py-20 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          label="Proximos eventos"
+          label="Próximos eventos"
           title="Agenda de Eventos"
-          subtitle="Jornadas, congresos y formacion para profesionales de la seguridad privada."
+          subtitle="Jornadas, congresos y formación para profesionales de la seguridad privada."
         />
 
         {typedEvents.length === 0 ? (
@@ -154,10 +154,10 @@ async function EventsSection() {
               <CalendarIcon className="w-8 h-8 text-primary-400" />
             </div>
             <h3 className="font-heading text-display-xs text-foreground mb-2">
-              Proximos eventos en preparacion
+              Próximos eventos en preparación
             </h3>
             <p className="text-body-md text-foreground-secondary max-w-md mx-auto">
-              Estamos preparando la proxima edicion. Vuelve pronto o contacta con nosotros para mas informacion.
+              Estamos preparando la próxima edición. Vuelve pronto o contacta con nosotros para más información.
             </p>
             <Link
               href="/contacto"

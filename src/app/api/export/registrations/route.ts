@@ -30,7 +30,7 @@ export async function GET(req: NextRequest) {
 
     if (!parsed.success) {
       return NextResponse.json(
-        { error: 'Parametros invalidos', details: parsed.error.flatten() },
+        { error: 'Parámetros inválidos', details: parsed.error.flatten() },
         { status: 400 }
       )
     }

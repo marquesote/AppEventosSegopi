@@ -28,10 +28,10 @@ export function CTABanner() {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-1.5 mb-4">
               <CalendarIcon className="w-4 h-4 text-white" />
-              <span className="text-body-sm text-white font-medium">Proximos eventos</span>
+              <span className="text-body-sm text-white font-medium">Próximos eventos</span>
             </div>
             <h2 className="font-heading text-3xl md:text-4xl text-white font-bold mb-3">
-              No te pierdas el proximo evento
+              No te pierdas el próximo evento
             </h2>
             <p className="text-body-lg text-white/85 max-w-xl">
               Inscribete y forma parte de la comunidad de profesionales de la seguridad privada en Espana.

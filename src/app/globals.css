@@ -71,10 +71,10 @@
   --shadow-glass: 0 8px 32px 0 rgba(230, 0, 126, 0.1);
 
   /* Gradient Mesh */
-  --gradient-primary: linear-gradient(135deg, #E6007E 0%, #FF4D9A 50%, #CC006F 100%);
-  --gradient-mesh-1: radial-gradient(at 40% 20%, hsla(330, 100%, 45%, 0.3) 0px, transparent 50%);
-  --gradient-mesh-2: radial-gradient(at 80% 0%, hsla(330, 80%, 65%, 0.2) 0px, transparent 50%);
-  --gradient-mesh-3: radial-gradient(at 0% 50%, hsla(340, 85%, 55%, 0.15) 0px, transparent 50%);
+  --gradient-primary: #E6007E;
+  --gradient-mesh-1: radial-gradient(at 40% 20%, hsla(330, 100%, 45%, 0.08) 0px, transparent 50%);
+  --gradient-mesh-2: radial-gradient(at 80% 0%, hsla(330, 80%, 65%, 0.05) 0px, transparent 50%);
+  --gradient-mesh-3: radial-gradient(at 0% 50%, hsla(340, 85%, 55%, 0.05) 0px, transparent 50%);
 }
 
 html {

@@ -59,6 +59,7 @@ export interface Event {
   city: string
   country: string
   google_maps_embed_url: string | null
+  venue_image_url: string | null
   latitude: number | null
   longitude: number | null
 
@@ -108,6 +109,10 @@ export interface Registration {
   // RGPD
   registration_ip: string
   user_agent: string | null
+
+  // QR check-in
+  qr_token: string | null
+  thanked_at: string | null
 
   // Sorteo
   raffle_eligible: boolean
@@ -320,6 +325,7 @@ export interface CreateEventDTO {
   city: string
   country?: string
   google_maps_embed_url?: string
+  venue_image_url?: string
   latitude?: number
   longitude?: number
   benefits?: EventBenefit[]

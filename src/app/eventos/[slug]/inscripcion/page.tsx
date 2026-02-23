@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!event) return { title: 'Evento no encontrado' }
 
   return {
-    title: `Inscripcion - ${event.title} | ${siteConfig.platformName}`,
-    description: `Formulario de inscripcion para ${event.title} en ${event.city}`,
+    title: `Inscripción - ${event.title} | ${siteConfig.platformName}`,
+    description: `Formulario de inscripción para ${event.title} en ${event.city}`,
   }
 }
 
@@ -33,7 +33,7 @@ export default async function RegistrationPage({ params }: PageProps) {
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <div className="card-elevated p-8 max-w-md text-center">
           <h1 className="text-display-xs mb-4">Inscripciones cerradas</h1>
-          <p className="text-foreground-secondary mb-6">El plazo de inscripcion para este evento ha finalizado.</p>
+          <p className="text-foreground-secondary mb-6">El plazo de inscripción para este evento ha finalizado.</p>
           <Link href={`/eventos/${slug}`} className="text-primary-500 font-medium hover:text-primary-600">
             Volver al evento
           </Link>
