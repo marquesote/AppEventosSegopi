@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { registrationSchema } from '@/features/registrations/types/schemas'
 import crypto from 'crypto'
-import QRCode from 'qrcode'
+import { generateBrandedQR } from '@/lib/qr'
 import { sendEmail } from '@/lib/email'
 import { registrationConfirmationEmail } from '@/lib/email/templates'
 
@@ -206,7 +206,7 @@ export async function POST(request: NextRequest) {
       try {
         const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
         const checkinUrl = `${siteUrl}/api/checkin?token=${qrToken}`
-        const qrDataUrl = await QRCode.toDataURL(checkinUrl, { width: 300, margin: 2 })
+        const qrDataUrl = await generateBrandedQR(checkinUrl)
 
         const eventDate = new Date(eventDetails.event_date).toLocaleDateString('es-ES', {
           weekday: 'long',

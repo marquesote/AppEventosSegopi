@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { sendEmail } from '@/lib/email'
 import { registrationConfirmationEmail, attendanceThankYouEmail } from '@/lib/email/templates'
-import QRCode from 'qrcode'
+import { generateBrandedQR } from '@/lib/qr'
 
 export async function POST(request: NextRequest) {
   const cronSecret = process.env.CRON_SECRET
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
   // Generate a sample QR code
   const sampleQrUrl = `${siteUrl}/api/checkin?token=test-sample-token`
-  const qrDataUrl = await QRCode.toDataURL(sampleQrUrl, { width: 300, margin: 2 })
+  const qrDataUrl = await generateBrandedQR(sampleQrUrl)
 
   for (const email of recipients) {
     const result: { email: string; confirmation: string; thankYou: string } = {
